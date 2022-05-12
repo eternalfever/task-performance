@@ -1,26 +1,2 @@
-const contacts = document.getElementsByClassName("contacts")[0];
-const stickyHeader = document.getElementsByClassName("stickyHeader")[0];
+const contacts=document.getElementsByClassName("contacts")[0],stickyHeader=document.getElementsByClassName("stickyHeader")[0];function addContacts(){const t=document.createDocumentFragment();for(let e=0;e<5e4;e++){const c=document.createElement("div");c.textContent=e,c.classList.add("contact"),t.appendChild(c)}contacts.appendChild(t)}contacts.addEventListener("scroll",t=>{const e=document.getElementsByClassName("contact")[0];stickyHeader.textContent=parseInt(contacts.scrollTop/e.offsetTop)}),addContacts();
 
-function addContacts() {
-  const fragment = document.createDocumentFragment();
-  for (let i = 0; i < 50000; i++) {
-    const child = document.createElement("div");
-    child.textContent = i;
-    child.classList.add("contact");
-    fragment.appendChild(child);
-  }
-  contacts.appendChild(fragment);
-}
-
-contacts.addEventListener("scroll", (e) => {
-  const items = Array.from(contacts.getElementsByClassName("contact"));
-  const itemOffsets = items.map((item) => item.offsetTop);
-  const topItemIndex = itemOffsets.findIndex(
-    (offset) => contacts.scrollTop - offset <= -18
-  );
-  if (topItemIndex !== -1) {
-    stickyHeader.textContent = items[topItemIndex].textContent;
-  }
-});
-
-addContacts();
